@@ -19,22 +19,28 @@
             <a class="nav-link" aria-current="page" href="./index.html">Pagrindinis</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Papildai</a>
+            <a class="nav-link" href="./papildaiPage.html">Papildai</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Apranga</a>
+            <a class="nav-link" href="./aprangaPage.html">Apranga</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Sportiniai įrankiai</a>
+            <a class="nav-link" href="./irankiaiPage.html">Sportiniai įrankiai</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Papildų rinkiniai</a>
+            <a class="nav-link" href="./rinkiniaiPage.html">Papildų rinkiniai</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Išpardavimai</a>
+            <a class="nav-link" href="./ispardavimaiPage.html">Išpardavimai</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Naujienos</a>
+            <a class="nav-link" href="./naujienosPage.html">Naujienos</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="./atsiliepimaiPage.html">Atsiliepimai</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="./FAQ.html">FAQ</a>
           </li>
         </ul>
         <a class="btn btn-outline-primary btn-sm mb-2" href="./loginPage.html">Prisijungti</a>
@@ -47,7 +53,6 @@
   </nav>
     <div class="container">
         <h1>Atsiliepimai</h1>
-        <!-- Atsiliepimų forma -->
         <h2>Palikite savo atsiliepimą</h2>
         <form id="atsiliepimuForma">
             <div class="mb-3">
@@ -61,14 +66,11 @@
             <button type="submit" class="btn btn-primary">Siųsti</button>
         </form>
 
-        <!-- Atsiliepimų rodymas -->
         <div id="atsiliepimai">
-            <!-- Čia bus rodomi atsiliepimai -->
         </div>
     </div>
     <script src="js/bootstrap.bundle.js"></script>
     <script>
-        // Funkcija, kuri gauna ir rodo atsiliepimus
         function gautiAtsiliepimus() {
             var xhr = new XMLHttpRequest();
             xhr.onreadystatechange = function() {
@@ -80,12 +82,10 @@
             xhr.send();
         }
 
-        // Iškviečiame funkciją užkrovus puslapį
         gautiAtsiliepimus();
 
-        // Pridedame įvykį formai
         document.getElementById("atsiliepimuForma").addEventListener("submit", function(event) {
-            event.preventDefault(); // Neleidžiame formai pateikti standartinio elgesio
+            event.preventDefault(); 
             var vardas = document.getElementById("vardas").value;
             var komentaras = document.getElementById("komentaras").value;
 
@@ -93,12 +93,12 @@
             var xhr = new XMLHttpRequest();
             xhr.onreadystatechange = function() {
                 if (xhr.readyState === 4 && xhr.status === 200) {
-                    gautiAtsiliepimus(); // Atnaujiname atsiliepimų rodymą po naujo atsiliepimo pridėjimo
-                    document.getElementById("vardas").value = ""; // Išvalome laukus po atsiliepimo pridėjimo
+                    gautiAtsiliepimus(); 
+                    document.getElementById("vardas").value = ""; 
                     document.getElementById("komentaras").value = "";
                 }
             };
-            xhr.open("POST", "prideti_atsiliepima.php", true); // Keiskite šią URL į savo serverio puslapį, kuris pridės atsiliepimą
+            xhr.open("POST", "prideti_atsiliepima.php", true); 
             xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
             xhr.send("vardas=" + vardas + "&komentaras=" + komentaras);
         });
