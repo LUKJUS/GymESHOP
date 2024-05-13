@@ -3,5 +3,74 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<body>
+    
+    <div>
+        <div class="wrapper">
+            <h1><b>FAQ</b></h1>
+            <div>
+                <h2>Daznai uzduodami klausimai</h2>
+                <div class="FAQ">
+                    <button class="accordion">
+                        Kam reikalingas kreatinas
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </button>
+                    <div class="panel">
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit,aliquipex
+                        </p>
+                    </div>
+                </div>
+                <div class="FAQ">
+                    <button class="accordion">
+                        Kokie papildai man tinka labiausiai?
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </button>
+                    <div class="panel">
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit,aliquipex
+                        </p>
+                    </div>
+                </div>
+                <div class="FAQ">
+                    <button class="accordion">
+                        Kokios kompanijos papildai geriausi?
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </button>
+                    <div class="panel">
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit,aliquipex
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>
+            var acc = document.getElementsByClassName
+                ("accordion");
+            var i;
+
+            for (i = 0; i < acc.length; i++) {
+                acc[i].addEventListener("click", function () {
+                    this.classList.toggle("active");
+                    this.parentElement.classList.toggle("active");
+
+                    var panel = this.nextElementSibling;
+
+                    if (panel.style.display === "block") {
+                        panel.style.display = "none";
+                    }
+                    else {
+                        panel.style.display = "block";
+                    }
+                });
+            }
+        </script>
+    </div>
+    </footer>
+    <!-- End of Footer -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+            crossorigin="anonymous"></script>
+</body>
 

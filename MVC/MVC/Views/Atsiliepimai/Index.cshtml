@@ -3,5 +3,59 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<body>
+    
+    <div class="container">
+        <h1>Atsiliepimai</h1>
+        <h2>Palikite savo atsiliepimą</h2>
+        <form id="atsiliepimuForma">
+            <div class="mb-3">
+                <label for="vardas" class="form-label">Vardas</label>
+                <input type="text" class="form-control" id="vardas" placeholder="Įveskite savo vardą">
+            </div>
+            <div class="mb-3">
+                <label for="komentaras" class="form-label">Atsiliepimas</label>
+                <textarea class="form-control" id="komentaras" rows="3" placeholder="Palikite savo atsiliepimą"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Siųsti</button>
+        </form>
+
+        <div id="atsiliepimai">
+        </div>
+    </div>
+    <script src="js/bootstrap.bundle.js"></script>
+    <script>
+        function gautiAtsiliepimus() {
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    document.getElementById("atsiliepimai").innerHTML = xhr.responseText;
+                }
+            };
+            xhr.open("GET", "gauti_atsiliepimus.php", true);
+            xhr.send();
+        }
+
+        gautiAtsiliepimus();
+
+        document.getElementById("atsiliepimuForma").addEventListener("submit", function (event) {
+            event.preventDefault();
+            var vardas = document.getElementById("vardas").value;
+            var komentaras = document.getElementById("komentaras").value;
+
+            // AJAX užklausa į serverį, kad išsaugotų naują atsiliepimą
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    gautiAtsiliepimus();
+                    document.getElementById("vardas").value = "";
+                    document.getElementById("komentaras").value = "";
+                }
+            };
+            xhr.open("POST", "prideti_atsiliepima.php", true);
+            xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            xhr.send("vardas=" + vardas + "&komentaras=" + komentaras);
+        });
+    </script>
+</body>
 
