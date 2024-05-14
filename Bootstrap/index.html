@@ -51,24 +51,61 @@
       </div>
     </div>
   </nav>
+  <section class="product">
     <div class="container">
-        <h1>Atsiliepimai</h1>
-        <h2>Palikite savo atsiliepimą</h2>
-        <form id="atsiliepimuForma">
-            <div class="mb-3">
-                <label for="vardas" class="form-label">Vardas</label>
-                <input type="text" class="form-control" id="vardas" placeholder="Įveskite savo vardą">
-            </div>
-            <div class="mb-3">
-                <label for="komentaras" class="form-label">Atsiliepimas</label>
-                <textarea class="form-control" id="komentaras" rows="3" placeholder="Palikite savo atsiliepimą"></textarea>
-            </div>
-            <button type="submit" class="btn btn-primary">Siųsti</button>
-        </form>
-
-        <div id="atsiliepimai">
+      <div class="row py-5">
+        <div class="col-lg-5 m-auto text-center">
+          <h1>Perkamiausi produktai</h1>
         </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-3 text-center">
+          <div class="card  border-0 mb-2">
+            <div class="card-body">
+              <a href="./products/iso-fuji.html">
+                <img src="./pics/iso-fuji.jpg" class="img-fluid">
+              </a>  
+            </div>
+            <h6>Yamamoto Nutrition Iso-Fuji</h6>
+            <p>89.99$</p>
+          </div>
+        </div>
+        <div class="col-lg-3 text-center">
+          <div class="card  border-0 mb-2">
+            <div class="card-body">
+              <a href="./products/berberina.html">
+                <img src="./pics/berberina.jpg" class="img-fluid">
+              </a>
+            </div>
+            <h6>Yamamoto Nutrition Berberina</h6>
+            <p>12.99$</p>
+          </div>
+        </div>
+        <div class="col-lg-3 text-center">
+          <div class="card  border-0 mb-2">
+            <div class="card-body">
+              <a href="./products/gaba.html">
+                <img src="./pics/gaba.png" class="img-fluid">
+              </a>
+            </div>
+            <h6>Yamamoto Nutrition GABA</h6>
+            <p>10.99$</p>
+          </div>
+        </div>
+        <div class="col-lg-3 text-center">
+          <div class="card  border-0 mb-2">
+            <div class="card-body">
+              <a href="./products/glutamine.html">
+                <img src="./pics/glutamine.jpg" class="img-fluid">
+              </a>
+            </div>
+            <h6>Yamamoto Nutrition Glutamine</h6>
+            <p>45.00$</p>
+          </div>
+        </div>
+      </div>
     </div>
+  </section>
     <script src="js/bootstrap.bundle.js"></script>
     <script>
         function gautiAtsiliepimus() {
