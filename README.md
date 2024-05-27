@@ -55,3 +55,4 @@ Contributions are always welcome!
 - [@LUKJUS](https://github.com/LUKJUS)
 - [@Deiwuzas](https://github.com/Deiwuzas)
 - [@maatspe](https://github.com/maatspe)
+- [@juozas393](https://github.com/juozas393)
