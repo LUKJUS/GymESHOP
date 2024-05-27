@@ -1,50 +1,87 @@
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using MVC.Data;
+namespace Org.Ktu.Isk.P175B602.Autonuoma;
 
-var builder = WebApplication.CreateBuilder(args);
-var config = builder.Configuration;
-
-// Add services to the container.
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlServer(connectionString));
-builder.Services.AddDatabaseDeveloperPageExceptionFilter();
-
-builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-    .AddEntityFrameworkStores<ApplicationDbContext>();
-builder.Services.AddControllersWithViews();
+using NLog;
 
 
-
-var app = builder.Build();
-
-
-
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+/// <summary>
+/// <para>Program entry class.</para>
+/// <para>Static members are thread safe, instance members are not.</para>
+/// </summary>
+public class Program
 {
-    app.UseMigrationsEndPoint();
+	/// <summary>
+	/// Logger for this class.
+	/// </summary>
+	Logger log = LogManager.GetCurrentClassLogger();
+
+	/// <summary>
+	/// Configure logging subsystem.
+	/// </summary>
+	private static void ConfigureLogging()
+	{
+		var config = new NLog.Config.LoggingConfiguration();
+
+		var console =
+			new NLog.Targets.ConsoleTarget("console")
+			{
+				Layout = @"${date:format=HH\:mm\:ss}|${level}| ${message} ${exception}"
+			};
+		config.AddTarget(console);
+		config.AddRuleForAllLevels(console);
+
+		LogManager.Configuration = config;
+	}
+
+	/// <summary>
+	/// Program entry point.
+	/// </summary>
+	/// <param name="args">Command line arguments.</param>
+	public static void Main(string[] args)
+	{
+		ConfigureLogging();
+
+		var self = new Program();
+		self.Run(args);
+	}
+
+	/// <summary>
+	/// Program body.
+	/// </summary>
+	/// <param name="args">Command line arguments.</param>
+	private void Run(string[] args)
+	{
+		try
+		{
+			var builder = WebApplication.CreateBuilder(args);
+
+			//set the address and port the Kestrel server should bind to
+			builder.WebHost.ConfigureKestrel(opts =>
+			{
+				opts.Listen(System.Net.IPAddress.Loopback, 5000);
+			});
+
+			//add services to the container.
+			builder.Services.AddRazorPages();
+
+			//build the app
+			var app = builder.Build();
+
+			//initialize configuration helper
+			Config.CreateSingletonInstance(app.Configuration);
+
+			//
+			app.UseStaticFiles();
+			app.UseRouting();
+			app.UseAuthorization();
+
+			app.MapDefaultControllerRoute();
+			app.MapRazorPages();
+
+			app.Run();
+		}
+		catch (Exception e)
+		{
+			log.Error(e, "Unhandled exception caught when initializing program. The main thread is now dead.");
+		}
+	}
 }
-else
-{
-    app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-    app.UseHsts();
-}
-
-
-
-app.UseHttpsRedirection();
-app.UseStaticFiles();
-
-app.UseRouting();
-
-app.UseAuthorization();
-
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
-app.MapRazorPages();
-
-app.Run();

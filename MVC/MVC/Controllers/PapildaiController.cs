@@ -1,27 +1,33 @@
-﻿using System.Diagnostics;
+﻿namespace Org.Ktu.Isk.P175B602.Autonuoma.Controllers;
+
 using Microsoft.AspNetCore.Mvc;
+
+using Org.Ktu.Isk.P175B602.Autonuoma.Repositories;
 using MVC.Models;
+using System.Diagnostics;
 
-namespace MVC.Controllers
+
+/// <summary>
+/// Controller for working with 'Sponsor' entity.
+/// </summary>
+public class PapildaiController : Controller
 {
-    public class PapildaiController : Controller
-    {
-        private readonly ILogger<HomeController> _logger;
+	/// <summary>
+	/// This is invoked when either 'Index' action is requested or no action is provided.
+	/// </summary>
+	/// <returns>Entity list view.</returns>
+	[HttpGet]
+	public IActionResult Index()
+	{
+        //gražinamas komandų sarašo vaizdas
+        return View("Index", PapildaiRepo.List());
+	}
 
-        public PapildaiController(ILogger<HomeController> logger)
-        {
-            _logger = logger;
-        }
+	[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+	public IActionResult Error()
+	{
+		return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+	}
 
-        public IActionResult Index()
-        {
-            return View();
-        }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
-    }
 }
