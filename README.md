@@ -1,5 +1,5 @@
 
-# Sporto papildų apsipirkimo svėtainė
+# Sporto reikmių ir treniruočių svėtainė (E-shop'as)
 
 Tai yra internetinis projektas, skirtas sporto klubo svetainei kurti. Ši svetainė bus naudojama sporto entuziastams , norintiems gauti informacijos apie klubo paslaugas, produktus, tvarkaraščius, treniruotes ir naujienas. Svetainė taip pat bus skirta potencialiems naujiems nariams, norintiems sužinoti daugiau apie klubo teikiamas paslaugas ir prisijungimo galimybes.
 
