@@ -18,6 +18,8 @@ Skiltyje "Naujienos" bus skelbiamos naujausios klubo naujienos, specialūs pasi�
     6.	Kontaktai:
 Puslapio pabaigoje bus kontaktinė informacija, kaip susisiekti su klubo administratoriais, taip pat galbūt bus įdėta žemėlapis su klubo padėtimi.
 
+## Techininis aprašymas:
+
 
 ## Usage/Examples
 
@@ -42,6 +44,7 @@ This project is licensed under the [MIT](https://choosealicense.com/licenses/mit
 
 **Server:** [MariaDB](https://mariadb.org), [Apache](https://httpd.apache.org)
 
+**Comunication & planning**: Jira darbų planavimui ir pasiskirstymui, discord ir messenger comunikacijai.
 
 ## Contributing
 
