@@ -1,0 +1,101 @@
+﻿@{
+    ViewData["Title"] = "Pagrindinis";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="@Url.Content("~/css/bootstrap.css")">
+</head>
+    <section class="product">
+        <div class="container">
+            <div class="row py-5">
+                <div class="col-lg-5 m-auto text-center">
+                    <h1>Perkamiausi produktai</h1>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-3 text-center">
+                    <div class="card border-0 mb-2">
+                        <div class="card-body">
+                            <a href="@Url.Action("ProductDetail", "Products", new { id = "iso-fuji" })">
+                                <img src="@Url.Content("~/pics/iso-fuji.jpg")" class="img-fluid" alt="Yamamoto Nutrition Iso-Fuji">
+                            </a>
+                        </div>
+                        <h6>Yamamoto Nutrition Iso-Fuji</h6>
+                        <p>89.99$</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 text-center">
+                    <div class="card border-0 mb-2">
+                        <div class="card-body">
+                            <a href="@Url.Action("ProductDetail", "Products", new { id = "berberina" })">
+                                <img src="@Url.Content("~/pics/berberina.jpg")" class="img-fluid" alt="Yamamoto Nutrition Berberina">
+                            </a>
+                        </div>
+                        <h6>Yamamoto Nutrition Berberina</h6>
+                        <p>12.99$</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 text-center">
+                    <div class="card border-0 mb-2">
+                        <div class="card-body">
+                            <a href="@Url.Action("ProductDetail", "Products", new { id = "gaba" })">
+                                <img src="@Url.Content("~/pics/gaba.png")" class="img-fluid" alt="Yamamoto Nutrition GABA">
+                            </a>
+                        </div>
+                        <h6>Yamamoto Nutrition GABA</h6>
+                        <p>10.99$</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 text-center">
+                    <div class="card border-0 mb-2">
+                        <div class="card-body">
+                            <a href="@Url.Action("ProductDetail", "Products", new { id = "glutamine" })">
+                                <img src="@Url.Content("~/pics/glutamine.jpg")" class="img-fluid" alt="Yamamoto Nutrition Glutamine">
+                            </a>
+                        </div>
+                        <h6>Yamamoto Nutrition Glutamine</h6>
+                        <p>45.00$</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script src="@Url.Content("~/js/bootstrap.bundle.js")"></script>
+    <script>
+        function gautiAtsiliepimus() {
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    document.getElementById("atsiliepimai").innerHTML = xhr.responseText;
+                }
+            };
+            xhr.open("GET", "@Url.Action("GautiAtsiliepimus", "Home")", true);
+            xhr.send();
+        }
+
+        gautiAtsiliepimus();
+
+        document.getElementById("atsiliepimuForma").addEventListener("submit", function(event) {
+            event.preventDefault();
+            var vardas = document.getElementById("vardas").value;
+            var komentaras = document.getElementById("komentaras").value;
+
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    gautiAtsiliepimus();
+                    document.getElementById("vardas").value = "";
+                    document.getElementById("komentaras").value = "";
+                }
+            };
+            xhr.open("POST", "@Url.Action("PridetiAtsiliepima", "Home")", true);
+            xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            xhr.send("vardas=" + vardas + "&komentaras=" + komentaras);
+        });
+    </script>
+</html>
