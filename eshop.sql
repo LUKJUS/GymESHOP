@@ -29,12 +29,12 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `products` (
   `Id` int NOT NULL,
-  `Name` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
-  `Type` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
+  `Name` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
+  `Type` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
   `Price` double DEFAULT NULL,
-  `Img` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
-  `Description` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `Img` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
+  `Description` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `products`

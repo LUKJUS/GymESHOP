@@ -1,0 +1,70 @@
+﻿@model IEnumerable<Org.Ktu.Isk.P175B602.Autonuoma.Models.UzsakymasF2.UzsakymasL>
+
+@* this will also be used as page title in main layout *@
+@{ ViewData["title"] = "Užsakymas (F2)"; }
+
+@* content header *@
+<div class="main-content-header">
+	<span class="title">@ViewData["title"]</span>
+	<span class="actions">
+		<a href="@Url.Action("Create")" class="btn btn-primary"><i class="fa-solid fa-plus"></i> Sukurti naują</a>
+	</span>
+</div>
+
+@* content itself *@
+<div class="main-content-lst">
+	<table class="entity-list">
+		<thead>
+			<tr>
+				<th>
+					@Html.DisplayNameFor(m => m.Data)
+				</th>
+				<th>
+					@Html.DisplayNameFor(m => m.Busena)
+				</th>
+				<th>
+					@Html.DisplayNameFor(m => m.Sutartis)
+				</th>
+				<th>
+					@Html.DisplayNameFor(m => m.UzsakymoID)
+				</th>
+				<th>
+					@Html.DisplayNameFor(m => m.Atsiliepimas)
+				</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var item in Model) {
+			<tr>
+				<th>
+					@Html.DisplayFor(m => item.Data)
+				</th>
+				<th>
+					@Html.DisplayFor(m => item.Busena)
+				</th>
+				<th>
+					@Html.DisplayFor(m => item.Sutartis)
+				</th>
+				<th>
+					@Html.DisplayFor(m => item.UzsakymoID)
+				</th>
+				<th>
+					@Html.DisplayFor(m => item.Atsiliepimas)
+				</th>
+				<td>
+					<a 
+						href="@Url.Action("Edit", new { id = item.UzsakymoID })" 
+						class="btn btn-primary"
+						><i class="fa-solid fa-pen-to-square"></i> Redaguoti</a>
+						
+					<a 
+						href="@Url.Action("Delete", new { id = item.UzsakymoID })" 
+						class="btn btn-danger"
+						><i class="fa-solid fa-trash"></i> Šalinti</a>					
+				</td>
+			</tr>
+			}
+		</tbody>
+	</table>
+</div>

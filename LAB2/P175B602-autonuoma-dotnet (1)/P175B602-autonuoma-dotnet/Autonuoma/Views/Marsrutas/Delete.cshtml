@@ -1,0 +1,68 @@
+﻿@model Org.Ktu.Isk.P175B602.Autonuoma.Models.Salonas.MarsrutasCE
+
+@* This will also be used as page title in main layout *@
+@{ ViewData["title"] = "Marsruto šalinimas"; }
+
+@* Content header *@
+<div class="main-content-header">
+    <span class="title">@ViewData["title"]</span>
+    <span class="actions">
+        <a href="@Url.Action("Index")" class="btn btn-outline-primary btn-sm">
+            <i class="fa-solid fa-angles-left"></i> Atgal į sąrašą
+        </a>
+    </span>
+</div>
+
+@* Content itself *@
+<div class="main-content-ced">
+    @using (Html.BeginForm(FormMethod.Post, new { @class = "entity-d" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <fieldset>
+            <legend class="confirm-msg">Ar tikrai norite šalinti šį marsrutą?</legend>
+
+            <dl>
+                <dt>@Html.DisplayNameFor(m => m.Marsrutas.PradineVieta)</dt>
+                <dd>@Html.DisplayFor(m => m.Marsrutas.PradineVieta)</dd>
+
+                <dt>@Html.DisplayNameFor(m => m.Marsrutas.PaskirtiesVieta)</dt>
+                <dd>@Html.DisplayFor(m => m.Marsrutas.PaskirtiesVieta)</dd>
+
+                <dt>@Html.DisplayNameFor(m => m.Marsrutas.Atstumas)</dt>
+                <dd>@Html.DisplayFor(m => m.Marsrutas.Atstumas)</dd>
+
+                <dt>@Html.DisplayNameFor(m => m.Marsrutas.Trukme)</dt>
+                <dd>@Html.DisplayFor(m => m.Marsrutas.Trukme)</dd>
+            </dl>
+
+            @if (ViewData["deletionNotPermitted"] != null)
+            {
+                <div class="fail-msg">
+                    <i class="fa-solid fa-circle-exclamation"></i> Šio marsruto pašalinti negalima, nes 
+                    jis turi ryšių į priklausomas esybes.
+                </div>
+            }
+            else
+            {
+                <div class="buttons">
+				<button
+					formaction="@Url.Action("DeleteConfirm", new {id = Model.Marsrutas.Id})"
+					class="btn btn-danger"
+					style="white-space: nowrap;"
+				><i class="fa-solid fa-trash"></i> Šalinti</button>
+                </div>
+            }
+        </fieldset>
+    }
+</div>
+
+@* Content footer *@
+<div class="main-content-footer">
+    <span class="title"></span>
+    <span class="actions">
+        <a href="@Url.Action("Index")" class="btn btn-outline-primary btn-sm">
+            <i class="fa-solid fa-angles-left"></i> Atgal į sąrašą
+        </a>
+    </span>
+</div>

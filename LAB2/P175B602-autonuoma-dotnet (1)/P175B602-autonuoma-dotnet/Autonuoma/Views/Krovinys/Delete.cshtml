@@ -1,0 +1,69 @@
+﻿@model Org.Ktu.Isk.P175B602.Autonuoma.Models.Krovinys.KrovinysCE
+
+@{ 
+    ViewData["title"] = "Krovinio šalinimas";
+}
+
+<div class="main-content-header">
+    <span class="title">@ViewData["title"]</span>
+    <span class="actions">
+        <a href="@Url.Action("Index")" class="btn btn-outline-primary btn-sm">
+            <i class="fa-solid fa-angles-left"></i> Atgal į sarašą
+        </a>
+    </span>
+</div>
+
+<div class="main-content-ced">
+	@using (Html.BeginForm("DeleteConfirm", "Krovinys", new { id = Model.Krovinys.Id }, FormMethod.Post, null, new { @class = "entity-d" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <fieldset>
+            <legend class="confirm-msg">Ar tikrai norite šalinti šį krovinį?</legend>
+
+            <dl>
+                <dt>@Html.DisplayNameFor(m => m.Krovinys.Miestas)</dt>
+                <dd>@Html.DisplayFor(m => m.Krovinys.Miestas)</dd>
+
+                <dt>@Html.DisplayNameFor(m => m.Krovinys.Svoris)</dt>
+                <dd>@Html.DisplayFor(m => m.Krovinys.Svoris)</dd>
+
+                <dt>@Html.DisplayNameFor(m => m.Krovinys.PristatymoBusena)</dt>
+                <dd>@Html.DisplayFor(m => m.Krovinys.PristatymoBusena)</dd>
+
+                <dt>@Html.DisplayNameFor(m => m.Krovinys.fkTransportoPriemone)</dt>
+                <dd>@Html.DisplayFor(m => m.Krovinys.fkTransportoPriemone)</dd>
+
+                <dt>@Html.DisplayNameFor(m => m.Krovinys.fkMarsrutas)</dt>
+                <dd>@Html.DisplayFor(m => m.Krovinys.fkMarsrutas)</dd>
+            </dl>
+
+            <!-- Jei šalinimas draudžiamas, parodykime pranešimą -->
+            @if (ViewData["deletionNotPermitted"] != null)
+            {
+                <div class="fail-msg">
+                    <i class="fa-solid fa-circle-exclamation"></i> Šio krovinio pašalinti negalima,
+                    nes jis turi ryšių į priklausomas esybes.
+                </div>
+            }
+            <!-- Kitu atveju rodykime šalinimo mygtuką -->
+
+            <div class="buttons">
+				<button
+					formaction="@Url.Action("DeleteConfirm", new {id = Model.Krovinys.Id})"
+					class="btn btn-danger"
+					style="white-space: nowrap;"
+				><i class="fa-solid fa-trash"></i> Šalinti</button>
+            </div>
+        </fieldset>
+    }
+</div>
+
+<div class="main-content-footer">
+    <span class="title"></span>
+    <span class="actions">
+        <a href="@Url.Action("Index")" class="btn btn-outline-primary btn-sm">
+            <i class="fa-solid fa-angles-left"></i> Atgal į sarašą
+        </a>
+    </span>
+</div>
