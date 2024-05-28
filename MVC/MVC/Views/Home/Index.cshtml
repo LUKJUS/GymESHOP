@@ -1,28 +1,71 @@
 ﻿@{
-    ViewData["Title"] = "Pradinis";
+    ViewData["Title"] = "Pagrindinis";
 }
 
-<body>
-   
-    <div class="container">
-        <h1>Atsiliepimai</h1>
-        <h2>Palikite savo atsiliepimą</h2>
-        <form id="atsiliepimuForma">
-            <div class="mb-3">
-                <label for="vardas" class="form-label">Vardas</label>
-                <input type="text" class="form-control" id="vardas" placeholder="Įveskite savo vardą">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="@Url.Content("~/css/bootstrap.css")">
+</head>
+    <section class="product">
+        <div class="container">
+            <div class="row py-5">
+                <div class="col-lg-5 m-auto text-center">
+                    <h1>Perkamiausi produktai</h1>
+                </div>
             </div>
-            <div class="mb-3">
-                <label for="komentaras" class="form-label">Atsiliepimas</label>
-                <textarea class="form-control" id="komentaras" rows="3" placeholder="Palikite savo atsiliepimą"></textarea>
+            <div class="row">
+                <div class="col-lg-3 text-center">
+                    <div class="card border-0 mb-2">
+                        <div class="card-body">
+                            <a href="@Url.Action("ProductDetail", "Products", new { id = "iso-fuji" })">
+                                <img src="@Url.Content("~/pics/iso-fuji.jpg")" class="img-fluid" alt="Yamamoto Nutrition Iso-Fuji">
+                            </a>
+                        </div>
+                        <h6>Yamamoto Nutrition Iso-Fuji</h6>
+                        <p>89.99$</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 text-center">
+                    <div class="card border-0 mb-2">
+                        <div class="card-body">
+                            <a href="@Url.Action("ProductDetail", "Products", new { id = "berberina" })">
+                                <img src="@Url.Content("~/pics/berberina.jpg")" class="img-fluid" alt="Yamamoto Nutrition Berberina">
+                            </a>
+                        </div>
+                        <h6>Yamamoto Nutrition Berberina</h6>
+                        <p>12.99$</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 text-center">
+                    <div class="card border-0 mb-2">
+                        <div class="card-body">
+                            <a href="@Url.Action("ProductDetail", "Products", new { id = "gaba" })">
+                                <img src="@Url.Content("~/pics/gaba.png")" class="img-fluid" alt="Yamamoto Nutrition GABA">
+                            </a>
+                        </div>
+                        <h6>Yamamoto Nutrition GABA</h6>
+                        <p>10.99$</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 text-center">
+                    <div class="card border-0 mb-2">
+                        <div class="card-body">
+                            <a href="@Url.Action("ProductDetail", "Products", new { id = "glutamine" })">
+                                <img src="@Url.Content("~/pics/glutamine.jpg")" class="img-fluid" alt="Yamamoto Nutrition Glutamine">
+                            </a>
+                        </div>
+                        <h6>Yamamoto Nutrition Glutamine</h6>
+                        <p>45.00$</p>
+                    </div>
+                </div>
             </div>
-            <button type="submit" class="btn btn-primary">Siųsti</button>
-        </form>
-
-        <div id="atsiliepimai">
         </div>
-    </div>
-    <script src="js/bootstrap.bundle.js"></script>
+    </section>
+    <script src="@Url.Content("~/js/bootstrap.bundle.js")"></script>
     <script>
         function gautiAtsiliepimus() {
             var xhr = new XMLHttpRequest();
@@ -31,7 +74,7 @@
                     document.getElementById("atsiliepimai").innerHTML = xhr.responseText;
                 }
             };
-            xhr.open("GET", "gauti_atsiliepimus.php", true);
+            xhr.open("GET", "@Url.Action("GautiAtsiliepimus", "Home")", true);
             xhr.send();
         }
 
@@ -42,7 +85,6 @@
             var vardas = document.getElementById("vardas").value;
             var komentaras = document.getElementById("komentaras").value;
 
-            // AJAX užklausa į serverį, kad išsaugotų naują atsiliepimą
             var xhr = new XMLHttpRequest();
             xhr.onreadystatechange = function() {
                 if (xhr.readyState === 4 && xhr.status === 200) {
@@ -51,9 +93,9 @@
                     document.getElementById("komentaras").value = "";
                 }
             };
-            xhr.open("POST", "prideti_atsiliepima.php", true);
+            xhr.open("POST", "@Url.Action("PridetiAtsiliepima", "Home")", true);
             xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
             xhr.send("vardas=" + vardas + "&komentaras=" + komentaras);
         });
     </script>
-</body>
+</html>
